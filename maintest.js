@@ -1,8 +1,8 @@
-/* Creating timeline*/    
-var timeline = [];
-  
 /*Define the hosting site*/
 var repo_site = "https://kimjh21.github.io/lexicaldecisiontask/";
+
+/* Creating timeline*/    
+var timeline = [];
 
 /*Preload images*/
 var preload = {

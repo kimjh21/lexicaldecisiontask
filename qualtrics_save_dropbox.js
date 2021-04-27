@@ -9,16 +9,15 @@ Qualtrics.SurveyEngine.addOnload(function () {
     // Hide buttons
     qthis.hideNextButton();
 
-    /* Change 2: Defining and load required resources */
-    var task_github = "https://kimjh21.github.io/lexicaldecisiontask/"; // https://<your-github-username>.github.io/<your-experiment-name>
+    /* Change 2: Defining and loading required resources */
+    var jslib_url = "https://kywch.github.io/jsPsych/";
 
-    // requiredResources must include all the JS files that demo-simple-rt-task-transformed.html uses.
+    // the below urls must be accessible with your browser
+    // for example, https://kywch.github.io/jsPsych/jspsych.js
     var requiredResources = [
-        'https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.30/Dropbox-sdk.min.js', 
-        task_github + "jspsych-6.3.1/jspsych.js",
-        task_github + "jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js",
-        task_github + "jspsych-6.3.1/plugins/jspsych-html-button-response.js",
-        task_github + "LDT_Calories.js"
+        'https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.30/Dropbox-sdk.min.js', // Change 6: Loading the Dropbox API
+        jslib_url + "jspsych.js",
+        jslib_url + "plugins/jspsych-html-keyboard-response.js"
     ];
 
     function loadScript(idx) {
@@ -47,12 +46,11 @@ Qualtrics.SurveyEngine.addOnload(function () {
     var sbj_id = "${e://Field/workerId}";
 
     // YOU MUST GET YOUR OWN DROPBOX ACCESS TOKEN
-    var dropbox_access_token = '5h8GFEE6HsMAAAAAAAAAAXXZINaOLaFU0NzeVm93wTDBkPfz2R2VpbQDijWilJfa';
+    var dropbox_access_token = '<5h8GFEE6HsMAAAAAAAAAAXXZINaOLaFU0NzeVm93wTDBkPfz2R2VpbQDijWilJfa>';
 
     // my preference is to include the task and sbj_id in the file name
     var save_filename = '/' + task_name + '/' + task_name + '_' + sbj_id;
 
-    /*Save csv files*/
     function save_data_csv() {
         try {
             var dbx = new Dropbox.Dropbox({
@@ -75,27 +73,20 @@ Qualtrics.SurveyEngine.addOnload(function () {
         }        
     }
 
-    /* Change 4: Wrapping jsPsych.init() in a function */
+    /* Change 4: Wraping jsPsych.init() in a function */
     function initExp() {
 
-        jsPsych.init({
-            timeline: timeline,
-            display_element: 'display_stage',
-            on_finish: function (data) {
-                /* Change 5: Summarizing and save the results to Qualtrics */
-                // summarize the results
-                var trials = jsPsych.data.get().filter({
-                    test_part: 'test'
-                });
-                var correct_trials = trials.filter({
-                    correct: true
-                });
-                var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
-                var rt = Math.round(correct_trials.select('rt').mean());
+        var hello_trial = {
+            type: 'html-keyboard-response',
+            stimulus: 'LDT_Calories'
+        }
 
-                // save to qualtrics embedded data
-                Qualtrics.SurveyEngine.setEmbeddedData("accuracy", accuracy);
-                Qualtrics.SurveyEngine.setEmbeddedData("rt", rt);
+        jsPsych.init({
+            timeline: [hello_trial],
+            display_element: 'display_stage',
+
+            /* Change 5: Adding the clean up and continue functions.*/
+            on_finish: function (data) {
 
                 /* Change 8: Calling the save function -- CHOOSE ONE! */
                 // include the participant ID in the data
@@ -104,10 +95,9 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
                 save_data_csv();
 
-                /* Change 6: Adding the clean up and continue functions.*/
                 // clear the stage
-                jQuery('#display_stage').remove();
-                jQuery('#display_stage_background').remove();
+                jQuery('display_stage').remove();
+                jQuery('display_stage_background').remove();
 
                 // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
                 qthis.clickNextButton();

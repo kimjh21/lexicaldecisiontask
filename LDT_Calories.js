@@ -44,16 +44,12 @@ var test_stimuli = [
     {word: 'computer', correct_response: 'f', word_category: 'neutral'},
     {word: 'binder', correct_response: 'f', word_category: 'neutral'},
     {word: 'glue', correct_response: 'f', word_category: 'neutral'},
-    {word: 'fembr', correct_response: 'j', word_category: 'nonword'},
-    {word: 'tvngs', correct_response: 'j', word_category: 'nonword'},
+    {word: 'note', correct_response: 'f', word_category: 'neutral'},
     {word: 'npght', correct_response: 'j', word_category: 'nonword'},
     {word: 'hankk', correct_response: 'j', word_category: 'nonword'},
     {word: 'pecjn', correct_response: 'j', word_category: 'nonword'},
-    {word: 'pettl', correct_response: 'j', word_category: 'nonword'},
     {word: 'ctrnso', correct_response: 'j', word_category: 'nonword'},
     {word: 'ltple', correct_response: 'j', word_category: 'nonword'},
-    {word: 'lpagt', correct_response: 'j', word_category: 'nonword'},
-    {word: 'gtprgth', correct_response: 'j', word_category: 'nonword'},
     {word: 'bxu', correct_response: 'j', word_category: 'nonword'},
     {word: 'gabls', correct_response: 'j', word_category: 'nonword'}
 ];

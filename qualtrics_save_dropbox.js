@@ -46,7 +46,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
     var sbj_id = "${e://Field/workerId}";
 
     // YOU MUST GET YOUR OWN DROPBOX ACCESS TOKEN
-    var dropbox_access_token = '<5h8GFEE6HsMAAAAAAAAAAXXZINaOLaFU0NzeVm93wTDBkPfz2R2VpbQDijWilJfa>';
+    var dropbox_access_token = '<w-2ZCqFUGKYAAAAAAAAAASOfhtsKZ1WzJgQCHoXe4x32A8QWrzhfT31fhKEYm330>';
 
     // my preference is to include the task and sbj_id in the file name
     var save_filename = '/' + task_name + '/' + task_name + '_' + sbj_id;
